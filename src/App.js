@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useEffect, useState } from 'react'
+const LAUNCHES_QUERY=`
+{
+  launchesPast(limit: 10) {
+    id
+    mission_name
+    
+  }
+}
+`
+const App = () => {
+  
+  const[launches,setLaunches]=useState([]);
+  useEffect(()=>{
+    fetch('https://api.spacex.land/graphql/',{
+      method:"POST",
+      headers:{"Content-type":"application/json"},
+      body:JSON.stringify({query:LAUNCHES_QUERY})
+    }).then(response=>response.json())
+    .then(data=>setLaunches(data))
+    
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+     <h1>Spacex Launches:</h1> 
+     <ul>
+      {launches.map((launch)=>(
+        <li key={launch.id}>{launch.mission_name}</li>
+      ))}
+     </ul>
+
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
