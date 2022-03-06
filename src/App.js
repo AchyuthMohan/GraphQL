@@ -17,7 +17,7 @@ const App = () => {
       headers:{"Content-type":"application/json"},
       body:JSON.stringify({query:LAUNCHES_QUERY})
     }).then(response=>response.json())
-    .then(data=>setLaunches(data))
+    .then(data=>setLaunches(data.data.launchesPast))
     
   },[])
   return (
