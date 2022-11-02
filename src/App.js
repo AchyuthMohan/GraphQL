@@ -1,33 +1,17 @@
-import React, { useEffect, useState } from 'react'
-const LAUNCHES_QUERY=`
-{
-  launchesPast(limit: 10) {
-    id
-    mission_name
-    
-  }
-}
-`
+import React from 'react'
+// import Mainpage from './pages/Mainpage/Mainpage'
+// import BoxPrint from './pages/BoxPrint/BoxPrint'
+// import UseEffectExample from './pages/useEffectExapmle/UseEffectExample'
+import PropsPage from './pages/PropsPage/PropsPage'
+import JsonApi from './pages/JsonApi/JsonApi'
 const App = () => {
-  
-  const[launches,setLaunches]=useState([]);
-  useEffect(()=>{
-    fetch('https://api.spacex.land/graphql/',{
-      method:"POST",
-      headers:{"Content-type":"application/json"},
-      body:JSON.stringify({query:LAUNCHES_QUERY})
-    }).then(response=>response.json())
-    .then(data=>setLaunches(data.data.launchesPast))
-    
-  },[])
   return (
     <div>
-     <h1>Spacex Launches:</h1> 
-     <ul>
-      {launches.map((launch)=>(
-        <li key={launch.id}>{launch.mission_name}</li>
-      ))}
-     </ul>
+      {/* <Mainpage/> */}
+      {/* <BoxPrint/> */}
+      {/* <UseEffectExample/> */}
+      {/* <PropsPage/> */}
+      <JsonApi/>
 
     </div>
   )
